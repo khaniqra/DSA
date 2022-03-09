@@ -1,0 +1,84 @@
+/* stack using linked list*/
+
+/* 1. cd /Desktop
+2. gcc my_program.c -o my_program.out
+3. ./my_program.out */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+ int c=3; //to denote capacity of stack
+
+struct abc{
+int data;
+struct abc *next;
+};
+
+struct abc *top=NULL,*head=NULL;
+
+void push(int a);
+void pop();
+void pick();
+
+int main() {
+  //printf("Enter the capacity of stack: ");
+  //scanf("%d",&c);
+  push(10);
+  push(20);
+  push(30);
+pop();
+pick();
+  return 0;
+}
+
+void push(int a){
+  struct abc *temp;
+  temp = (struct abc*)malloc(sizeof(struct abc*));
+  if(c!=0){
+    if(top==NULL){ //i.e if its first node
+      temp->data=a;
+      temp->next=NULL; 
+      top=temp; //here top is null we are assigning it value now
+      head=top;
+      c--;
+     printf("\n first node created");
+
+    }
+    else{
+      temp = (struct abc*)(malloc(sizeof(struct abc*)));
+      temp->data=a;
+      temp->next=NULL;
+      top->next=temp;
+      top=top->next; 
+      c--;
+printf("\n next node created");
+    }
+  }
+  else{
+    printf("Stack is full");
+  }
+}
+void pop(){
+  if(top==NULL){
+    printf("Stack is empty");
+  }
+  else{
+    struct abc *q;
+    q=head; //q at initial position
+    while(q->next!=top){
+      q=q->next; //to move q to the node before top i.e 2nd last node
+    }
+    free(top);
+    top=q;  //assigning top to new position
+    c++;
+  }
+}
+void pick(){
+  if(top!=NULL){
+    
+    printf("\nData at top is: %d",top->data);
+  }
+  else{
+     printf("There is nothing to display");
+  }
+}
