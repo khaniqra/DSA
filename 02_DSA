@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct abc{
+   int data;
+   struct abc *left,*right;
+};
+
+struct abc *create(int d){
+  struct abc *temp;
+  temp=(struct abc*)malloc(sizeof(struct abc));
+  temp->data=d;
+  temp->left=NULL;
+  temp->right=NULL;
+  return temp;
+}
+
+struct abc *insert(struct abc *root,int d){
+  if(root==NULL){
+    return create(d);
+  }
+  else if (root->data>d){
+    root-> left = insert(root->left,d);
+  }
+  else{
+    root->right=insert(root->right,d);
+  }
+  return root;
+}
+
+void inorder(struct abc* root){
+  if(root==NULL)
+   return;
+  inorder(root->left);
+  printf("%d\t",root->data);
+  inorder(root->right);
+}
+
+struct abc * search(struct abc *root,int d){
+  if(root==NULL){
+    printf("Tree is empty\n");
+  }
+  else if(root->data==d){
+     printf("\nElement found: %d\n",root->data);
+  }
+  else if (root->data<d){
+    return search(root->right,d);
+  }
+  else{
+    return search(root->left,d);
+  }
+}
+
+struct abc* inordersu(struct abc*root){
+  struct abc*p;
+  p=root;
+  while(p!=NULL && p->left!=NULL){
+    p=p->left;
+  }
+  return p;
+}
+
+struct abc *delete(struct abc*root,int d){
+  if(root==NULL){
+    return root;
+  }
+  else if(root->data>d){
+    root->left=delete(root->left,d);
+  }
+  else if(root->data<d){
+    root->right=delete(root->right,d);
+  }
+  else{
+    if(root->left==NULL){
+      struct abc* temp;
+      temp=root->right;
+      free(root);
+      return temp;
+    }
+    else if(root->right==NULL){
+      struct abc* temp;
+      temp=root->left;
+      free(root);
+      return temp;
+    }
+    else if(root->left==NULL && root->right==NULL){
+      free(root);
+    }
+    else{
+      if(root->right!=NULL){
+        struct abc* temp;
+        temp=inordersu(root->right);
+        root->data=temp->data;
+        root->right=delete(root->right,temp->data);
+        return root;
+        }S
+      else{
+        struct abc* temp;
+        temp=inordersu()
+      }
+    }
+  }
+}
+
+int main(){
+  struct abc *root=NULL;
+  root=insert(root,15);
+  root=insert(root,10);
+  root=insert(root,20);
+  root=insert(root,5);
+  root=insert(root,8);
+  root=insert(root,35);
+  root=insert(root,7);
+  root=insert(root,42);
+  root=insert(root,41);
+  inorder(root);
+  search(root,5);
+  search(root,42);
+  delete(root,15);
+  inorder(root);
+  
+} 
+
+
+
+
+
+
+
+
+
+
+
