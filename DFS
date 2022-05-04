@@ -1,0 +1,42 @@
+#include<stdio.h>
+
+int A[10][10];
+int visited[10];
+int n;
+
+void DFS(int v){
+	visited[v]=1;
+	printf("%d",v);
+
+	for(int i=1;i<=n;i++){
+		if(A[v][i]==1 && !visited[i]){
+			DFS(i);
+		}
+	}
+}
+
+int main(){
+
+  int v;	
+
+	printf("Enter no of vertices: ");
+	scanf("%d",&n);
+
+	printf("Enter first vertex: ");
+	scanf("%d",&v);
+
+	printf("Enter the values of matrix: \n");
+	
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+      printf("A[%d][%d]: ",i,j);
+			scanf("%d",&A[i][j]);	
+		}
+	}
+
+	for(int i=0;i<n;i++){
+		visited[i]=0;
+	}
+
+	DFS(v);
+}
