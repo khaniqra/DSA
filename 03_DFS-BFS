@@ -1,0 +1,83 @@
+#include<stdio.h>
+
+int a[20][20], q[20],visited[20],n,i,j,f=0,r=-1;
+
+int A[10][10];
+int visited1[10];
+int n1;
+
+void DFS(int v){
+	visited[v]=1;
+	printf("%d\t",v);
+
+	for(int i=1;i<=n;i++){
+		if(A[v][i]==1 && !visited[i]){
+			DFS(i);
+		}
+	}
+}
+
+void bfs(int v) {
+	for (i=1;i<=n;i++)
+	  if(a[v][i] && !visited[i])
+	    q[++r]=i;
+	  if(f<=r) {
+		visited[q[f]]=1;
+		bfs(q[f++]);
+	}
+}
+
+int main() {
+	int v;
+  int ch;
+	printf("\n Enter the number of vertices:");
+	scanf("%d",&n);
+  printf("\n Enter the starting vertex:");
+	scanf("%d",&v);
+ 
+	for (i=1;i<=n;i++) {
+		q[i]=0;
+		visited[i]=0;
+	}
+  for(int i=0;i<n;i++){
+		visited1[i]=0;
+	}
+
+   printf("Enter your choice:\n1.BFS\n2.DFS:\n");
+  scanf("%d",&ch);
+
+  switch(ch){
+    case 1: 
+      	printf("Enter the values of matrix:\n");
+	
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+		    printf("a[%d][%d]:\t",i,j);
+			scanf("%d",&a[i][j]);	
+		}
+	}
+	
+	bfs(v);
+	printf("\n The node which are reachable are:\n");
+	for (i=1;i<=n;i++)
+	  if(visited[i])
+	   printf("%d\t",i); 
+    else
+	   printf("\n Bfs is not possible");
+
+  break;
+
+    case 2:
+      printf("Enter the values of matrix: \n");
+	
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+      printf("A[%d][%d]: ",i,j);
+			scanf("%d",&A[i][j]);	
+		}
+	}
+    DFS(v);
+
+  }
+
+}
