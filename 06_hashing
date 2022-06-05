@@ -1,0 +1,161 @@
+/*Store data of students with telephone no and name in the structure using hashing function for
+telephone number and implement chaining with and without replacement*/
+
+#include <stdio.h>
+#include<string.h>
+struct dict
+{
+  char name[50];
+  char num[11];
+  char mail[35];
+}sp[25];//maintain phone book
+
+int h,i=1;
+int main()
+{
+  printf("----------------------------------------WELCOME TO E PHONE BOOK-------------------------\n");
+  //c will hold reg no of contact to remove
+  //addcon will hold no of contacts to be added
+  // a used for cont.
+  // v used to add contact after the total contacts in phn book
+  int c,addcon,a=1;
+  int choice,v,pos;
+  char b[50];
+  strcpy(sp[1].name,"AJAY");
+strcpy(sp[1].num,"6377834657");
+strcpy(sp[1].mail,"ajay@gmail.com");
+i++;
+  
+  strcpy(sp[2].name,"ARUL");
+strcpy(sp[2].num,"6746786567");
+strcpy(sp[2].mail,"arul@gmail.com");
+i++;
+  strcpy(sp[3].name,"ASWIN");strcpy(sp[3].num,"2983983893");strcpy(sp[3].mail,"aswin@gmail.com");
+i++;
+  
+  strcpy(sp[4].name,"BOOPESH");
+strcpy(sp[4].num,"3675576754");
+strcpy(sp[4].mail,"boopesh@gmail.com");
+i++;
+  
+  strcpy(sp[5].name,"DHANUSH");
+  strcpy(sp[5].num,"6752348972");
+  strcpy(sp[5].mail,"dhanush@gmail.com");
+  i++;
+  
+  while(a==1)
+  {
+    printf("1--->DISPLAY CONTACTS\n2--->DELETING CONTACTS\n3--->ADDING CONTACTS\n4--->FINDING CONTACTS");
+    printf("\nENTER YOUR CHOICE:");
+    scanf("%d",&choice);
+    for (int j=0;j<140;j++)
+    {
+      printf("_");
+    }
+    if(choice<=4)
+    {
+      switch(choice)
+      {
+        case 1:
+        printf("\nREG NO\tNAME\t\tNUMBER\t\t\tEMAIL");
+        for(int n=1;n<i;n++)
+        {
+          printf("\n%d\t%s\t\t%s\t\t%s",n,sp[n].name,sp[n].num,sp[n].mail);
+        }
+        printf("\n");
+        for (int j=0;j<140;j++)
+        {
+          printf("_");
+        }
+        break;   
+        case 2:
+        printf("\nENTER THE REG NO OF CONTACT TO REMOVE:");
+        scanf("%d",&h);
+        if(h>=i)//for reg no > toatal no in phn book
+        {
+          printf("INVALID REG NO");
+        }
+        else
+        {
+          for (c = h ; c <=i ; c++)
+         {
+                              strcpy(sp[c].name,sp[c+1].name);
+          strcpy(sp[c].num,sp[c+1].num);
+          strcpy(sp[c].mail,sp[c+1].mail);
+         }
+         i--;
+         for(int n=1;n<i;n++)
+         {
+            printf("\n%d\t%s\t\t%s\t%s",n,sp[n].name,sp[n].num,sp[n].mail);
+         }       
+        }
+        printf("\n");
+        for (int j=0;j<140;j++)
+        {
+          printf("_");
+        }
+        break;
+        case 3:
+        printf("\nADDING CONTACT");
+        printf("\nENTER THE NO OF PERSONS TO BE ADDED:");
+        scanf("%d",&addcon);
+        for (v=i;v<i+addcon;++v)
+        {
+          printf("\nenter name:");
+          scanf("%s",sp[v].name);
+          printf("\nenter number:");
+          scanf("%s",sp[v].num);
+          printf("\nenter mail:");
+          scanf("%s",sp[v].mail);
+        }
+        printf("\n");
+        for (int j=0;j<140;j++)
+        {
+          printf("_");
+        }
+        i=v;
+        printf("\nAFTER CHANGING\n");
+        printf("REG NO\tNAME\t\tNUMBER\t\t\tEMAIL");
+        for(int n=1;n<i;n++)
+        {
+          printf("\n%d\t%s\t\t%s\t\t%s",n,sp[n].name,sp[n].num,sp[n].mail);
+        }
+        printf("\n");
+        for (int j=0;j<140;j++)
+        {
+          printf("_");
+        }
+        break;
+        case 4:
+        printf("\nENTER THE REG NO OF THE PERSON:");
+        scanf("%d",&pos);
+        if(pos>=i)
+        {
+          printf("INVALID REG NO");
+        }
+        else
+        {
+          for (int y=pos-1;y<pos;y++)
+          {
+            printf("NAME:%s\n",sp[pos].name);
+            printf("PHONE NUMBER:%s\n",sp[pos].num);
+            printf("MAIL ID:%s\n",sp[pos].mail);
+          }    
+        }
+        printf("\n");
+        for (int j=0;j<140;j++)
+        {
+          printf("_");
+        }
+        break;
+    }
+  }
+  else
+  {
+    printf("\nINVALID CHOICE");
+  }
+  printf("\nPRESS 1 TO CONTINUE 0 T0 EXIT");
+  scanf("%d",&a);
+ }
+  return 0;
+}
