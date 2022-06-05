@@ -1,0 +1,73 @@
+#include <stdio.h>
+
+void swap(float* xp, float* yp)
+{
+    float temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+ 
+int main()
+{
+    int n=5;
+    float w[n];
+    float p[n];
+   
+    printf("Enter weights ");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%f",&w[i]);
+    }
+    printf("Enter cost ");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%f",&p[i]);
+    }
+    int max=100;
+    float cu[n];
+    for(int i=0;i<n;i++)
+    {
+        cu[i]=p[i]/w[i];
+    }
+    printf("Cost per unit :");
+    for(int i=0;i<n;i++)
+    {
+        printf("%f, ",cu[i]);
+    }
+   
+
+// A function to implement bubble sort
+ int i, j;
+    for (i = 0; i < n - 1; i++)
+    {
+        // Last i elements are already in place
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (cu[j] < cu[j + 1])
+            {
+                swap(&cu[j], &cu[j + 1]);
+                swap(&w[j], &w[j + 1]);
+                swap(&p[j], &p[j + 1]);
+            }
+        }
+    }
+    float tcost,capacity;
+   
+    for (i = 0; i < n - 1; i++)
+    {
+       
+        capacity = capacity + w[i];
+        tcost = tcost + p[i];
+        if(capacity >100)
+        {
+            float val = 1.0*((100-capacity)/w[i]);
+            capacity = capacity + w[i]*(val);
+            tcost = tcost + val*p[i];
+            break;
+        }
+         
+    }
+    printf("\n\n Total cost : %f",tcost);
+    printf("\n\n Total capacity : %f",capacity);
+   
+}
